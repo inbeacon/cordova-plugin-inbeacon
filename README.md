@@ -72,11 +72,12 @@ cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git --var
 ```
 
 You can also enter the variables in the fetch.json file in the plugins directory later:
+```
         "variables": {
             "INBEACON_CLIENTID": "your client-id",
             "INBEACON_SECRET": "your client-secret"
         }
-
+```
 
 ### Usage
 
