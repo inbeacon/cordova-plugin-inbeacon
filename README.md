@@ -124,3 +124,16 @@ function handleEnterRegion(event){
 }
 ```
 
+#### Minimal application
+
+For the most simple implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
+```
+onDeviceReady: function() {
+	app.receivedEvent('deviceready');
+	cordova.plugins.inBeacon.refresh(function(){
+		console.log('refresh done!');
+	}, function () {
+		console.error('refresh failed');
+	});
+},
+```
