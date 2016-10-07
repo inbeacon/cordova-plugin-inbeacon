@@ -1,3 +1,7 @@
+#### 1.1.3 (08-Oct-2016)
+- added RELEASE and CHANGELOG information
+ 
+
 # 1.1.1 (09.09.2016)
 * Fixed android issues when app was swiped out
 # 1.1.0 (27.06.2016)
