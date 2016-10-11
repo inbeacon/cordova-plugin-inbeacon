@@ -15,3 +15,18 @@ cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git
 Note the need to include the clientId and the clientSecret as parameters
 
 There is also a [complete example project available](https://github.com/inbeacon/inbeacon-cordova-example)
+
+## Minimal application
+
+For the most simple implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
+
+```
+onDeviceReady: function() {
+	app.receivedEvent('deviceready');
+	cordova.plugins.inBeacon.refresh(function(){
+		console.log('refresh done!');
+	}, function () {
+		console.error('refresh failed');
+	});
+},
+```

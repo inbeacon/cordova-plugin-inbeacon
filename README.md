@@ -1,34 +1,49 @@
-<!---
- license: Licensed to the Apache Software Foundation (ASF) under one
-         or more contributor license agreements.  See the NOTICE file
-         distributed with this work for additional information
-         regarding copyright ownership.  The ASF licenses this file
-         to you under the Apache License, Version 2.0 (the
-         "License"); you may not use this file except in compliance
-         with the License.  You may obtain a copy of the License at
-
-           http://www.apache.org/licenses/LICENSE-2.0
-
-         Unless required by applicable law or agreed to in writing,
-         software distributed under the License is distributed on an
-         "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-         KIND, either express or implied.  See the License for the
-         specific language governing permissions and limitations
-         under the License.
--->
+![image alt text](documentation/image_0.png)
 
 
-## ![inBeacon Cordova Plugin](http://snqpo25gig94mv8mcrpilul6.wpengine.netdna-cdn.com/wp-content/uploads/2016/02/inbeacon-dark-retina.png) Cordova inBeacon plugin
+## Cordova inBeacon plugin
 
 This plugin enables the InBeacon API for Cordova based apps on iOS and Android.
 
-### Features
+## Documentation
+
+Read the [full documentation](documentation/README.md)
+
+# installing the sdk
+
+These instructions assume you already have an account at[ inBeacon](https://inbeacon.nl/) and are in possession of an Client ID and Client Secret. You can find your client-ID and client-Secret in your [account overview](http://console.inbeacon.nl/accmgr) 
+
+Add the inbeacon plugin to your cordova app with:
+
+```bash
+cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git 
+   --variable INBEACON_CLIENTID="your-clientid" 
+   --variable INBEACON_SECRET="your-secret"
+```
+
+You need to include the clientId and the clientSecret as parameters
+
+## Minimal application
+
+For the most simple implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
+
+```
+onDeviceReady: function() {
+	app.receivedEvent('deviceready');
+	cordova.plugins.inBeacon.refresh(function(){
+		console.log('refresh done!');
+	}, function () {
+		console.error('refresh failed');
+	});
+},
+```
+
+## Features
 
 #### Features available on both Android and iOS
 
 ##### API calls
 
- * initialize
  * refresh
  * attachUser
  * detachUser
@@ -61,25 +76,6 @@ This plugin enables the InBeacon API for Cordova based apps on iOS and Android.
 ##### API call
 
  * askPermissions
-
-
-#### Installing with InBeacon clientId and secret
-
-Make sure you have your inbeacon client-id and secret ready, you can supply these when installing the plugin
-
-```
-cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git --variable INBEACON_CLIENTID="your-clientid" --variable INBEACON_SECRET="your-secret"
-```
-
-You can also enter the variables in the fetch.json file in the plugins directory later:
-```
-        "variables": {
-            "INBEACON_CLIENTID": "your client-id",
-            "INBEACON_SECRET": "your client-secret"
-        }
-```
-
-### Usage
 
 #### initialize
 
@@ -124,16 +120,4 @@ function handleEnterRegion(event){
 }
 ```
 
-#### Minimal application
 
-For the most simple implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
-```
-onDeviceReady: function() {
-	app.receivedEvent('deviceready');
-	cordova.plugins.inBeacon.refresh(function(){
-		console.log('refresh done!');
-	}, function () {
-		console.error('refresh failed');
-	});
-},
-```
