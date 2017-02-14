@@ -51,16 +51,7 @@ onDeviceReady: function() {
 
 ##### API events
 
- * inbeacon.enterregion
- * inbeacon.exitregion
- * inbeacon.enterlocation
- * inbeacon.exitlocation
- * inbeacon.regionsupdate
- * inbeacon.enterproximity
- * inbeacon.exitproximity
- * inbeacon.proximity
  * inbeacon.appevent
- * inbeacon.appaction
 
 #### Features exclusive to iOS
 
@@ -68,8 +59,6 @@ onDeviceReady: function() {
 
  * setLogLevel
  * checkCapabilitiesAndRightsWithAlert
- * getInRegions
- * getBeaconState
 
 #### Feature exclusive to Android
 
@@ -112,9 +101,9 @@ cordova.plugins.inBeacon.attachUser(userInfo, function () {
 To handle an InBeacon event just add a new event listener.
 
 ```
-document.addEventListener('inbeacon.enterregion', handleEnterRegion, false);
+document.addEventListener('inbeacon.appevent', handleAppEvent, false);
 
-function handleEnterRegion(event){
+function handleAppEVent(event){
     console.log('Event name:' + event.name);
     console.log('Event data:' + JSON.stringify(event.data));
 }

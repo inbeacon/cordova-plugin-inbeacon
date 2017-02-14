@@ -16,9 +16,9 @@ Note the need to include the clientId and the clientSecret as parameters
 
 There is also a [complete example project available](https://github.com/inbeacon/inbeacon-cordova-example)
 
-## Minimal application
+## Standard application
 
-For the most simple implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
+For the most common implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
 
 ```
 onDeviceReady: function() {
@@ -30,3 +30,8 @@ onDeviceReady: function() {
 	});
 },
 ```
+
+## Testing the application with beacons
+Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 
+
+Reload your app to make sure it refreshes, and you should be able to get beacon interactions in your app with this campaign. 

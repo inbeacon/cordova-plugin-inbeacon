@@ -74,50 +74,6 @@ Check to see if the app has the rights to run location and notification services
 cordova.plugins.inBeacon.checkCapabilitiesAndRights()
 ```
 
-### cordova.plugins.inBeacon.beaconState
-
-```javascript
-cordova.plugins.inBeacon.beaconState()
-```
-
-Get an array of all actual beacons within view, including their respective distance and proximity state. This method returns raw data without any filtering.
-
-The returned beaconState array has 1 entry for each beacon in view. Each array item has the following data: 
-
-<table>
-  <tr>
-    <td>Field</td>
-    <td>Description</td>
-  </tr>
-  <tr>
-    <td>uuid</td>
-    <td>beacon UUID value</td>
-  </tr>
-  <tr>
-    <td>major</td>
-    <td>beacon major value</td>
-  </tr>
-  <tr>
-    <td>minor</td>
-    <td>beacon minor value</td>
-  </tr>
-  <tr>
-    <td>proxes</td>
-    <td>Timestamps of all proximities last seen, format: <proximity>: <time last seen>
-Proximities are F, N and I.</td>
-  </tr>
-  <tr>
-    <td>rawdist</td>
-    <td>raw beacon distance in metres</td>
-  </tr>
-  <tr>
-    <td>rawprox</td>
-    <td>raw proximity (F, N, I or U) U = undefined, beacon currently not visible</td>
-  </tr>
-</table>
-
-
-Because beacon information is updated once per second, it is not useful to obtain the beaconstate more often.
 
 ## Receiving inBeaconSDK events 
 
@@ -127,44 +83,8 @@ Because beacon information is updated once per second, it is not useful to obtai
     <td>Description</td>
   </tr>
   <tr>
-    <td>inbeacon.enterregion</td>
-    <td>user entered a region</td>
-  </tr>
-  <tr>
-    <td>inbeacon.exitregion</td>
-    <td>user left a region</td>
-  </tr>
-  <tr>
-    <td>inbeacon.enterlocation</td>
-    <td>user entered a location</td>
-  </tr>
-  <tr>
-    <td>inbeacon.exitlocation</td>
-    <td>user left a location</td>
-  </tr>
-  <tr>
-    <td>inbeacon.regionsupdate</td>
-    <td>region definitions were updated</td>
-  </tr>
-  <tr>
-    <td>inbeacon.enterproximity</td>
-    <td>user entered a beacon proximity</td>
-  </tr>
-  <tr>
-    <td>inbeacon.exitproximity</td>
-    <td>user left a beacon proximity</td>
-  </tr>
-  <tr>
-    <td>inbeacon.proximity</td>
-    <td>low level proximity update, once every second when beacons are around</td>
-  </tr>
-  <tr>
     <td>inbeacon.appevent</td>
     <td>defined in the backend for application events</td>
-  </tr>
-  <tr>
-    <td>inbeacon.appaction</td>
-    <td>defined in the backend to handle your own local notifications</td>
   </tr>
 </table>
 
@@ -172,6 +92,6 @@ Because beacon information is updated once per second, it is not useful to obtai
 Example:
 
 ```javascript
-document.addEventListener('inbeacon.enterregion', handleEnterRegion, false);function handleEnterRegion(event){    console.log('Event name:' + event.name);    console.log('Event data:' + JSON.stringify(event.data));}
+document.addEventListener('inbeacon.appevent', handleAppEvent, false);function handleAppEvent(event){    console.log('Event name:' + event.name);    console.log('Event data:' + JSON.stringify(event.data));}
 ```
 

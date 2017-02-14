@@ -3,7 +3,7 @@
 
 Both the Android and the iOS parts of this component can be implemented in a Cordova project by following the regular instructions for [Android](https://github.com/inbeacon/InbeaconSdk-android) and [iOS](https://github.com/inbeacon/InbeaconSdk-IOS) native apps as provided by inBeacon
 
-These instructions assume you already have an account at[ inBeacon](https://inbeacon.nl/) and are in possession of an Client ID and Client Secret. You can find your client-ID and client-Secret in your [account overview](http://console.inbeacon.nl/accmgr) 
+These instructions assume you already have an account at[ inBeacon](https://inbeacon.nl/) and are in possession of an Client ID and Client Secret. You can find your client-ID and client-Secret in your [account overview](https://console.inbeacon.nl/account) 
 
 ## Android details
 
@@ -151,5 +151,5 @@ If you want the inBeacon platform to run in continuous background mode see above
 
 ### Include audio resources
 
-When using customized sounds with notifications, make sure to copy the audio files from the iOS SDK into your app. To do that, find the **./resources/*.caf** files in the iOS SDK and copy those files to the **./Resources** folder in your iOS project. Next, right-click on the files in Xamarin and make sure that 'Build Action' is set to 'BundleResource'. The audio files can also be found in the sample project included in the component.
+When using customized sounds with notifications, make sure to copy the audio files from the iOS SDK into your app. To do that, find the **./resources/*.caf** files in the iOS SDK and copy those files to the **./Resources** folder in your iOS project. Next, right-click on the files in Cordova and make sure that 'Build Action' is set to 'BundleResource'. The audio files can also be found in the sample project included in the component.
 
