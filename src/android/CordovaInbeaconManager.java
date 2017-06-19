@@ -174,11 +174,11 @@ public class CordovaInbeaconManager extends CordovaPlugin {
 						if (val instanceof Long)
 							userPropertyService.putPropertyLong(key, (long) ((Long)val).longValue());
 						else if (val instanceof Integer)
-							userPropertyService.putPropertyDouble(key, (long) ((Integer)val).integerValue());
+							userPropertyService.putPropertyDouble(key, (long) ((Integer)val).intValue());
 						else if (val instanceof Double)
 							userPropertyService.putPropertyDouble(key, (double) ((Double)val).doubleValue());
 						else if (val instanceof String)
-							userPropertyService.putPropertyString(key, val);
+							userPropertyService.putPropertyString(key, (String) val);
 							
                         // 2_0 user.put(key, kwargs.getString(key));
                     } catch (JSONException e) {
@@ -251,21 +251,21 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
 				// Log: 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
-				switch (logLevel) {
-				case 0L:	// none
+				switch ((int)logLevel) {
+				case 0:	// none
 					 InbeaconManager.getSharedInstance().setLogLevel(Log.ASSERT);
 					 break;
-	 			case 1L:  	// eroro
+	 			case 1:  	// eroro
 	 				InbeaconManager.getSharedInstance().setLogLevel(Log.ERROR);
 	 				break;
-		 		case 2L:	// log
+		 		case 2:	// log
 		 			InbeaconManager.getSharedInstance().setLogLevel(Log.WARN);
 		 			break;
-			 	case 3L:
+			 	case 3:
 			 		InbeaconManager.getSharedInstance().setLogLevel(Log.INFO);
 			 		break;
 				default:
-			 	case 4L:
+			 	case 4:
 			 		InbeaconManager.getSharedInstance().setLogLevel(Log.VERBOSE);
 			 		break;
 				}
