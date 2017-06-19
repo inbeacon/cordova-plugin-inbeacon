@@ -106,16 +106,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
      * @return                True if the action was valid, false if not.
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-
-        if ("initialize".equals(action)) {
-            initialize(args.optJSONObject(0), callbackContext);
-        } else if ("attachUser".equals(action)) {
-            attachUser(args.optJSONObject(0), callbackContext);
-        } else if ("detachUser".equals(action)) {
-            detachUser(callbackContext);
-        } else if ("refresh".equals(action)) {
-            refresh(callbackContext);
-        } else if ("checkCapabilitiesAndRights".equals(action)) {
+		if ("checkCapabilitiesAndRights".equals(action)) {
             verifyCapabilities(callbackContext);
         } else if ("askPermissions".equals(action)) {
             askPermissions(callbackContext);
@@ -123,10 +114,21 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             registerEventCallback(callbackContext);
         } else if ("stopListener".equals(action)) {
             unregisterEventCallback(callbackContext);
-
         } else if ("setLogLevel".equals(action)) {
             setLogLevel(args.getLong(0),callbackContext);	// 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
-		}	
+		} else if ("putProperties".equals(action)) {
+            putUserProperties(args.optJSONObject(0),callbackContext);	
+		}
+		// legacy
+        else if ("initialize".equals(action)) {
+            initialize(args.optJSONObject(0), callbackContext);
+        } else if ("attachUser".equals(action)) {
+            putUserProperties(args.optJSONObject(0), callbackContext);
+        } else if ("detachUser".equals(action)) {
+            detachUser(callbackContext);
+        } else if ("refresh".equals(action)) {
+            refresh(callbackContext);
+        }
 		// iOS only methods
         else if ("checkCapabilitiesAndRightsWithAlert".equals(action)) {
             callbackContext.error("checkCapabilitiesAndRightsWithAlert is only available on iOS");
@@ -150,13 +152,13 @@ public class CordovaInbeaconManager extends CordovaPlugin {
     private void initialize(final JSONObject kwargs, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-				// obsolete.. does nothing. See CordovaInbeaconApplication.java
+				// obsolete.. does nothing. Already initialized, See CordovaInbeaconApplication.java
                 callbackContext.success();
             }
         });
     }
 
-    private void attachUser(final JSONObject kwargs, final CallbackContext callbackContext) {
+    private void putUserProperties(final JSONObject kwargs, final CallbackContext callbackContext) {
 
         // kwargs keys can be:
         // name, email, customerid, address, gender, zip, city, country,  birth, phone_mobile,
@@ -168,7 +170,14 @@ public class CordovaInbeaconManager extends CordovaPlugin {
                 for (Iterator<String> iter = kwargs.keys(); iter.hasNext(); ) {
                     String key = iter.next();
                     try {
-						userPropertyService.putPropertyString(key, kwargs.getString(key));
+						Object val = kwargs.get(key);
+						if (val instanceof Integer)
+							userPropertyService.putPropertyLong(key, val);
+						else if (val instanceof Double)
+							userPropertyService.putPropertyDouble(key, val);
+						else if (val instanceof String)
+							userPropertyService.putPropertyString(key, val);
+							
                         // 2_0 user.put(key, kwargs.getString(key));
                     } catch (JSONException e) {
                         callbackContext.error("Invalid user info: " + e.toString());
