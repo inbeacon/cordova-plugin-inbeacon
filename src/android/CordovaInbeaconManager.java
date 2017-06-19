@@ -115,7 +115,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         } else if ("stopListener".equals(action)) {
             unregisterEventCallback(callbackContext);
         } else if ("setLogLevel".equals(action)) {
-            setLogLevel(args.getLong(0),callbackContext);	// 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
+            setLogLevel(args.getLong(0),callbackContext);	// int logLevel 0 - 4 (none error log info debug) 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
 		} else if ("putProperties".equals(action)) {
             putUserProperties(args.optJSONObject(0),callbackContext);	
 		}
@@ -244,10 +244,29 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         });
     }
 	
+	// int logLevel 0 - 4 (none error log info debug) 
     private void setLogLevel(final long logLevel, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                InbeaconManager.getSharedInstance().setLogLevel(logLevel);
+				// Log: 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
+				switch (logLevel) {
+				case 0L:	// none
+					 InbeaconManager.getSharedInstance().setLogLevel(Log.ASSERT);
+					 break;
+	 			case 1L:  	// eroro
+	 				InbeaconManager.getSharedInstance().setLogLevel(Log.ERROR);
+	 				break;
+		 		case 2L:	// log
+		 			InbeaconManager.getSharedInstance().setLogLevel(Log.WARN);
+		 			break;
+			 	case 3L:
+			 		InbeaconManager.getSharedInstance().setLogLevel(Log.INFO);
+			 		break;
+				default:
+			 	case 4L:
+			 		InbeaconManager.getSharedInstance().setLogLevel(Log.VERBOSE);
+			 		break;
+				}
                 callbackContext.success();
             }
         });

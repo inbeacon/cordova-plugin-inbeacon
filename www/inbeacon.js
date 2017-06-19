@@ -129,7 +129,7 @@ InBeacon.prototype.refresh = function(successCallback, errorCallback){
 /**
  * To change the logging level, using one of the predefined constants
  *
- * @param int logLevel 0 - 4 (none - debug)
+ * @param int logLevel 0 - 4 (none error log info debug)
  * @param {Function} successCallback The function to call when succeeded
  * @param {Function} errorCallback The function to call when there is an error (OPTIONAL)
  */
@@ -146,6 +146,17 @@ InBeacon.prototype.setLogLevel = function(logLevel, successCallback, errorCallba
  */
 InBeacon.prototype.attachUser = function(userInfo, successCallback, errorCallback){
     exec(successCallback, errorCallback || null, "InBeacon", "attachUser", [userInfo]);
+};
+
+/**
+ * Attach local userinformation to inbeacon
+ *
+ * @param userInfo
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.putProperties = function(userInfo, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "putProperties", [userInfo]);
 };
 
 /**

@@ -85,15 +85,14 @@ cordova.plugins.inBeacon.checkCapabilitiesAndRights()
 
 In order to get more logging, the loglevel might be increased. 
 Possible values:
-- 2 = Verbose
-- 3 = Debug
-- 4 = Info
-- 5 = Warning (default)
-- 6 = Error
-
+* InBeacon.LOG_NONE 
+* InBeacon.LOG_ERROR 
+* InBeacon.LOG_LOG 
+* InBeacon.LOG_INFO    
+* InBeacon.LOG_DEBUG    
 
 ```javascript
-cordova.plugins.inBeacon.setLogLevel(3);
+cordova.plugins.inBeacon.setLogLevel(cordova.plugins.inBeacon.LOG_DEBUG);
 ```
 
 
