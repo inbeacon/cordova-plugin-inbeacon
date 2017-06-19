@@ -5,11 +5,10 @@
 * attachUser
 * detachUser
 * checkCapabilitiesAndRights
-* setLogLevel (iOS only)
+* setLogLevel 
 * checkCapabilitiesAndRightsWithAlert (iOS only)
 * getInRegions (iOS only)
 * getBeaconState (iOS only)
-* checkCapabilitiesAndRights (android only)
 
 ### cordova.plugins.inBeacon.refresh
 
@@ -27,7 +26,7 @@ Obtain fresh trigger and region information from the inBeacon platform. Best pra
 
 	
 
-### cordova.plugins.inBeacon.attachUser
+### cordova.plugins.inBeacon.attachUser (legacy)
 
 ```javascript
 cordova.plugins.inBeacon.attachUser(userInfo,function cb(){});
@@ -35,7 +34,7 @@ cordova.plugins.inBeacon.attachUser(userInfo,function cb(){});
 
 Attach local userinformation to inbeacon. For instance, the user might enter account information in the app. It is also possible not to attach a user, in that case the device is anonymous. 
 
-Note:*  User account information is not stored by the SDK so you’ll need to call attachUser every time the app starts (after SDK initialization)*
+Note:*attachUser is a legacy method and is now superseeded by UserProperties*
 
 The inBeacon backend has user information for each device. The user information are properties that fall in any of the 2 categories:
 
@@ -49,18 +48,26 @@ The inBeacon backend has user information for each device. The user information 
 
 * Custom properties. You can define other properties, like "facebook-ID" or “age”
 
+User properties are persistent on the device, and also automatically synchronized with the backend and thus will survive an app re-install (on both iOS and Android)
 
 ```javascript
-var userInfo = {    name  : 'Dwight Schultz',    email : 'dwight@ateam.com'};cordova.plugins.inBeacon.attachUser(userInfo, function () {        console.log('Succesfully attached user');    }, function () {        console.error('Failed to attach user');    });
+var userInfo = {
+	name  : 'Dwight Schultz',
+	email : 'dwight@ateam.com'
+};
+cordova.plugins.inBeacon.attachUser(userInfo, function () {
+	console.log('Succesfully attached user');
+}, function () {
+	console.error('Failed to attach user');
+});
 ```
-
->Note that attached user info is not stored by the SDK. On app restart, you need to attach the user again.*
 
 	
 
-### cordova.plugins.inBeacon.detachUser
+### cordova.plugins.inBeacon.detachUser (obsolete)
 
-Remove user properties connected to the device.
+Remove user properties connected to the device. 
+Note: *detachUser is now obsolete and does nothing*
 
 ```javascript
 cordova.plugins.inBeacon.detachUser();
@@ -72,6 +79,21 @@ Check to see if the app has the rights to run location and notification services
 
 ```javascript
 cordova.plugins.inBeacon.checkCapabilitiesAndRights()
+```
+
+### cordova.plugins.inBeacon.setLogLevel
+
+In order to get more logging, the loglevel might be increased. 
+Possible values:
+- 2 = Verbose
+- 3 = Debug
+- 4 = Info
+- 5 = Warning (default)
+- 6 = Error
+
+
+```javascript
+cordova.plugins.inBeacon.setLogLevel(3);
 ```
 
 

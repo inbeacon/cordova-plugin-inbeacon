@@ -21,6 +21,7 @@ package com.inbeacon.cordova;
 
 import com.inbeacon.sdk.InbeaconManager;
 import com.inbeacon.sdk.Base.VerifiedCapability;
+import com.inbeacon.sdk.User.UserPropertyService;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -122,10 +123,12 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             registerEventCallback(callbackContext);
         } else if ("stopListener".equals(action)) {
             unregisterEventCallback(callbackContext);
-        // iOS only methods
+
         } else if ("setLogLevel".equals(action)) {
-            callbackContext.error("setLogLevel is only available on iOS");
-        } else if ("checkCapabilitiesAndRightsWithAlert".equals(action)) {
+            setLogLevel(args.getLong(0),callbackContext);	// 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
+		}	
+		// iOS only methods
+        else if ("checkCapabilitiesAndRightsWithAlert".equals(action)) {
             callbackContext.error("checkCapabilitiesAndRightsWithAlert is only available on iOS");
         } else if ("getInRegions".equals(action)) {
             callbackContext.error("getInRegions is only available on iOS");
@@ -154,16 +157,19 @@ public class CordovaInbeaconManager extends CordovaPlugin {
     }
 
     private void attachUser(final JSONObject kwargs, final CallbackContext callbackContext) {
+
         // kwargs keys can be:
         // name, email, customerid, address, gender, zip, city, country,  birth, phone_mobile,
         // phone_home, phone_work, social_facebook_id, social_twitter_id, social_linkedin_id
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                HashMap<String, String> user = new HashMap<String, String>();
+				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
+                //HashMap<String, String> user = new HashMap<String, String>();
                 for (Iterator<String> iter = kwargs.keys(); iter.hasNext(); ) {
                     String key = iter.next();
                     try {
-                        user.put(key, kwargs.getString(key));
+						userPropertyService.putPropertyString(key, kwargs.getString(key));
+                        // 2_0 user.put(key, kwargs.getString(key));
                     } catch (JSONException e) {
                         callbackContext.error("Invalid user info: " + e.toString());
                     }
@@ -178,7 +184,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
     private void detachUser(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                // 2_0 InbeaconManager.getSharedInstance().detachUser();
+                // 2_0 obsolete InbeaconManager.getSharedInstance().detachUser();
                 callbackContext.success();
             }
         });
@@ -228,6 +234,16 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             }
         });
     }
+	
+    private void setLogLevel(final long logLevel, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                InbeaconManager.getSharedInstance().setLogLevel(logLevel);
+                callbackContext.success();
+            }
+        });
+    }
+	
 
     //////////////// CORDOVA FUNCTIONS ///////////////////////////////////////
 
