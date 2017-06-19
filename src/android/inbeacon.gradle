@@ -6,7 +6,7 @@ ext.postBuildExtras = {
   }
 
   dependencies {
-    compile('com.inbeacon:android.sdk:1.+@aar'){ transitive = true }
+    compile('com.inbeacon:android.sdk:2.+@aar'){ transitive = true }
   }
 }
 
