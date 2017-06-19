@@ -169,7 +169,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
                     }
                 }
 
-                InbeaconManager.getSharedInstance().attachUser(user);
+                // 2_0 InbeaconManager.getSharedInstance().attachUser(user);
                 callbackContext.success();
             }
         });
@@ -178,7 +178,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
     private void detachUser(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-                InbeaconManager.getSharedInstance().detachUser();
+                // 2_0 InbeaconManager.getSharedInstance().detachUser();
                 callbackContext.success();
             }
         });
