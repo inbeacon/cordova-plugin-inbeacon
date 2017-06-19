@@ -118,6 +118,8 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             setLogLevel(args.getLong(0),callbackContext);	// int logLevel 0 - 4 (none error log info debug) 1=ALL 2=VERBOSE 3=DEBUG 4=INFO 5=WARN 6=ERROR 7=ASSERT 8=NONE
 		} else if ("putProperties".equals(action)) {
             putUserProperties(args.optJSONObject(0),callbackContext);	
+		} else if ("getProperty".equals(action)) {
+            getUserProperty(args.getString(0),callbackContext);
 		}
 		// legacy
         else if ("initialize".equals(action)) {
@@ -191,7 +193,16 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             }
         });
     }
-
+    private void getUserProperty(final String key, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
+				String val=userPropertyService.getPropertyString(key,'');
+				callbackContext.sendPluginResult(val);
+				callbackContext.success();
+            }
+        });
+    }
     private void detachUser(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
@@ -297,7 +308,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         // now done in CordovaInbeaconApplication // InbeaconManager.initialize(context, clientId, clientSecret);
         // just ask permissions and refresh
         InbeaconManager.getSharedInstance().askPermissions(cordova.getActivity());
-        InbeaconManager.getSharedInstance().refresh();
+        //InbeaconManager.getSharedInstance().refresh();
     }
 
     private void initEventListener() {

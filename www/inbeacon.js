@@ -138,7 +138,7 @@ InBeacon.prototype.setLogLevel = function(logLevel, successCallback, errorCallba
 };
 
 /**
- * Attach local userinformation to inbeacon
+ * Attach local userinformation to inbeacon (legacy)
  *
  * @param userInfo
  * @param successCallback
@@ -149,7 +149,7 @@ InBeacon.prototype.attachUser = function(userInfo, successCallback, errorCallbac
 };
 
 /**
- * Attach local userinformation to inbeacon
+ * put User properties (2.0)
  *
  * @param userInfo
  * @param successCallback
@@ -160,7 +160,19 @@ InBeacon.prototype.putProperties = function(userInfo, successCallback, errorCall
 };
 
 /**
- * Logout the current user. From now only anonymous info is send to inBeacon server.
+ * get User property (2.0)
+ *
+ * @param userInfo
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.getProperty = function(key, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "getProperty", [key]);
+};
+
+
+/**
+ * Logout the current user. From now only anonymous info is send to inBeacon server. (OBSOLETE)
  *
  * @param successCallback
  * @param errorCallback
