@@ -33,6 +33,12 @@ public class CordovaInbeaconApplication extends Application {
             return;
         }
         // initialize the shared instance on application level
-        InbeaconManager.initialize(this, clientId, clientSecret);
+        //InbeaconManager.initialize(this, clientId, clientSecret);
+		
+		// initialize the shared instance on application level with LOG level INFO
+        InbeaconManager.getInstance().setContext(this);
+        InbeaconManager.getInstance().setLogLevel(Log.INFO);
+        InbeaconManager.getInstance().setCredentials(clientId, clientSecret);   
+        InbeaconManager.getInstance().start();  // and we're off
     }
 }

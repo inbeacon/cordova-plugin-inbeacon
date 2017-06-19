@@ -147,7 +147,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
     private void initialize(final JSONObject kwargs, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
-				// obsolete.. does nothing
+				// obsolete.. does nothing. See CordovaInbeaconApplication.java
                 callbackContext.success();
             }
         });

@@ -46,10 +46,10 @@
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>This app would like to scan for iBeacons even when in the background.</string>
+            <string>This app would like to get your location even when in the background.</string>
         </config-file>
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>This app would like to scan for iBeacons while it is in use.</string>
+            <string>This app would like to get your location, but only when the app is active.</string>
         </config-file>
 
 

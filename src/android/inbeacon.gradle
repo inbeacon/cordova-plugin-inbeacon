@@ -3,6 +3,7 @@
 ext.postBuildExtras = {
   repositories {
     jcenter()
+	maven { url "https://dl.bintray.com/inbeacon/maven" }
   }
 
   dependencies {
