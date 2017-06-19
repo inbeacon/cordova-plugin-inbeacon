@@ -172,11 +172,11 @@ public class CordovaInbeaconManager extends CordovaPlugin {
                     try {
 						Object val = kwargs.get(key);
 						if (val instanceof Long)
-							userPropertyService.putPropertyLong(key, (long) val.longValue());
+							userPropertyService.putPropertyLong(key, (long) ((Long)val).longValue());
 						else if (val instanceof Integer)
-							userPropertyService.putPropertyDouble(key, (long) val.integerValue());
+							userPropertyService.putPropertyDouble(key, (long) ((Integer)val).integerValue());
 						else if (val instanceof Double)
-							userPropertyService.putPropertyDouble(key, (double) val.doubleValue());
+							userPropertyService.putPropertyDouble(key, (double) ((Double)val).doubleValue());
 						else if (val instanceof String)
 							userPropertyService.putPropertyString(key, val);
 							
