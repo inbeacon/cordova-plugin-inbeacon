@@ -20,7 +20,7 @@
 package com.inbeacon.cordova;
 
 import com.inbeacon.sdk.InbeaconManager;
-import com.inbeacon.sdk.VerifiedCapability;
+import com.inbeacon.sdk.Base.VerifiedCapability;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -108,10 +108,10 @@ public class CordovaInbeaconManager extends CordovaPlugin {
 
         if ("initialize".equals(action)) {
             initialize(args.optJSONObject(0), callbackContext);
-        } else if ("attachUser".equals(action)) {
-            attachUser(args.optJSONObject(0), callbackContext);
-        } else if ("detachUser".equals(action)) {
-            detachUser(callbackContext);
+        // } else if ("attachUser".equals(action)) {
+        //     attachUser(args.optJSONObject(0), callbackContext);
+        // } else if ("detachUser".equals(action)) {
+        //     detachUser(callbackContext);
         } else if ("refresh".equals(action)) {
             refresh(callbackContext);
         } else if ("checkCapabilitiesAndRights".equals(action)) {
