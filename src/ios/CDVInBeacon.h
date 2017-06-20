@@ -19,7 +19,8 @@
 
 #import <Cordova/CDV.h>
 #import <Foundation/Foundation.h>
-#import <inBeaconSdk/inBeaconSdk.h>
+//#import <inBeaconSdk/inBeaconSdk.h>
+#import <InbeaconSdk/InbeaconSdk.h>
 
 typedef CDVPluginResult* (^CDVPluginCommandHandler)(CDVInvokedUrlCommand*);
 
@@ -28,7 +29,7 @@ typedef CDVPluginResult* (^CDVPluginCommandHandler)(CDVInvokedUrlCommand*);
 	NSString* listenerCallbackId;
 }
 
-@property (retain) inBeaconSdk *inBeacon;
+@property (retain) InbeaconSdk *inBeacon;
 @property (strong) NSString* listenerCallbackId;
 
 - (void)initialize:(CDVInvokedUrlCommand*)command;
