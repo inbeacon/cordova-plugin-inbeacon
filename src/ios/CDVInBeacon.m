@@ -128,6 +128,13 @@ static NSString *const IO_OUT = @"o";
 	} :command];
 }
 
+- (void) triggerCustomEvent:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Not yet available on iOS"];
+	} :command];
+}
+
+
 - (void) detachUser:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		
