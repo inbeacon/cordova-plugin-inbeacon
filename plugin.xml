@@ -13,10 +13,10 @@
     <engines>
         <engine name="cordova-android" version=">=3.6.4"/>
         <engine name="cordova-plugman" version=">=4.2.0"/><!-- needed for gradleReference support -->
-        <engine name="cordova-ios" version=">=4.0.0"/>
+        <engine name="cordova-ios" version=">=4.4.0"/>
     </engines>
 	
-	<!-- swift support needed -->
+	<!-- swift support needed https://github.com/akofman/cordova-plugin-add-swift-support -->
 	<dependency id="cordova-plugin-add-swift-support" version="1.6.1"/>
 
     <!-- Plugin source code: Core -->

@@ -77,7 +77,13 @@ static NSString *const IO_OUT = @"o";
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 	
 		NSDictionary* userInfo = command.arguments[0];
-		if([userInfo count] > 0){
+		if([userInfo count] > 0) {
+			for(id key in userInfo) {
+			    id value = [userInfo objectForKey:key];
+				if ([value isKindOfClass:[NSString class]]) {
+					[InbeaconSdk.sharedInstance setUserString: value forKey: key];
+				}
+			}
 			//[[InbeaconSdk getInstance] attachUser:userInfo];
 			//[[InbeaconSdk getInstance] refresh];
 		}
