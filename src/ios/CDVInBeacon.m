@@ -83,6 +83,9 @@ static NSString *const IO_OUT = @"o";
 				if ([value isKindOfClass:[NSString class]]) {
 					[InbeaconSdk.sharedInstance setUserString: value forKey: key];
 				}
+				if ([value isKindOfClass: [NSNumber class]]) {
+					[InbeaconSdk.sharedInstance setUserNumber: value forKey: key];
+				}
 			}
 			//[[InbeaconSdk getInstance] attachUser:userInfo];
 			//[[InbeaconSdk getInstance] refresh];
@@ -100,6 +103,9 @@ static NSString *const IO_OUT = @"o";
 			    id value = [userInfo objectForKey:key];
 				if ([value isKindOfClass:[NSString class]]) {
 					[InbeaconSdk.sharedInstance setUserString: value forKey: key];
+				}
+				if ([value isKindOfClass: [NSNumber class]]) {
+					[InbeaconSdk.sharedInstance setUserNumber: value forKey: key];
 				}
 			}
 			//[[InbeaconSdk getInstance] attachUser:userInfo];
