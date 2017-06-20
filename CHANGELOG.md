@@ -1,3 +1,7 @@
+#### 2.0.1 (20-Jun-2017)
+- documentation improvements
+ 
+
 #### 2.0.0 (20-Jun-2017)
 - Upgraded to V2 native iOS and Android SDK's
 - added putProperties, getProperty, triggerCustomEvent

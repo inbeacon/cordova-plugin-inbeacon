@@ -144,11 +144,11 @@ cordova.plugins.inBeacon.checkCapabilitiesAndRights()
 
 In order to get more logging, the loglevel might be increased. 
 Possible values:
-* InBeacon.LOG_NONE 
-* InBeacon.LOG_ERROR 
-* InBeacon.LOG_LOG 
-* InBeacon.LOG_INFO    
-* InBeacon.LOG_DEBUG    
+* cordova.plugins.inBeacon.LOG_NONE 
+* cordova.plugins.inBeacon.LOG_ERROR 
+* cordova.plugins.inBeacon.LOG_LOG 
+* cordova.plugins.inBeacon.LOG_INFO    
+* cordova.plugins.inBeacon.LOG_DEBUG    
 
 ```javascript
 cordova.plugins.inBeacon.setLogLevel(cordova.plugins.inBeacon.LOG_DEBUG);
