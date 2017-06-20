@@ -137,7 +137,7 @@ static NSString *const IO_OUT = @"o";
 
 - (void) detachUser:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		
+		NSLog(@"detachUser - obsolete. Ignored.");
 		//[[InbeaconSdk getInstance] detachUser]; obsolete
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -154,6 +154,14 @@ static NSString *const IO_OUT = @"o";
 		//} else {
 			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		//}
+	} :command];
+}
+
+- (void) askPermissions:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		// Does nothing on iOS
+		NSLog(@"askPermissions - only for android. Ignored.");
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command];
 }
 
