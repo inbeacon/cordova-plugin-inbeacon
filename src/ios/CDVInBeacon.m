@@ -118,14 +118,14 @@ static NSString *const IO_OUT = @"o";
 
 - (void) getInRegions:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		NSArray *currentRegions = null; // [[InbeaconSdk getInstance]  getInRegions];
+		NSArray *currentRegions = nil; // [[InbeaconSdk getInstance]  getInRegions];
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:currentRegions];
 	} :command];
 }
 
 - (void) getBeaconState:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		NSArray *beaconState = null; // [[InbeaconSdk getInstance] getBeaconState];
+		NSArray *beaconState = nil; // [[InbeaconSdk getInstance] getBeaconState];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:beaconState];
 	} :command];
