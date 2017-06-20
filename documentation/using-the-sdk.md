@@ -1,6 +1,7 @@
 
 # SDK methods
 
+* askPermissions
 * putProperties
 * getProperty
 * checkCapabilitiesAndRights
@@ -18,7 +19,25 @@ iOS only methods
 * getInRegions (iOS only)
 * getBeaconState (iOS only)
 
+### cordova.plugins.inBeacon.askPermissions
 
+```javascript
+cordova.plugins.inBeacon.askPermissions(function () {}, function (error) {});
+```
+
+For the inBeacon SDK you need to get the user's permission to get the location and scan for beacons (iOS, android M and up). The SDK provides a helper method for this, but sometimes you want to roll your own.
+The simplest way is to call the helper method on onDeviceReady:
+```javascript
+    onDeviceReady: function() {
+		...
+        cordova.plugins.inBeacon.askPermissions(function () {
+			// success
+		}, function (error) {
+			// error
+		});
+    },
+```
+but you might postpone this question to a more appropriate moment.
 	
 ### cordova.plugins.inBeacon.putProperties
 ### cordova.plugins.inBeacon.attachUser (legacy)

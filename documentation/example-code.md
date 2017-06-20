@@ -18,7 +18,15 @@ There is also a [complete example project available](https://github.com/inbeacon
 
 ## Standard application
 
-Just add the plugin and you're good to go.
+For the inBeacon SDK you need to get the user's permission to get the location and scan for beacons (iOS, android M and up). The SDK provides a helper method for this, but sometimes you want to roll your own.
+The simplest way is to call the helper method on onDeviceReady (in your www/js/index.js):
+```javascript
+    onDeviceReady: function() {
+		...
+        cordova.plugins.inBeacon.askPermissions(function () {}, function (error) {});
+    },
+```
+but you might postpone this question to a more appropriate moment.
 
 ## Testing the application with beacons
 Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 

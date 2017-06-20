@@ -29,7 +29,15 @@ You need to include the clientId and the clientSecret as parameters
 
 ## Standard application
 
-Just include the plugin and your're ready.
+For the inBeacon SDK you need to get the user's permission to get the location and scan for beacons. The SDK provides a helper method for this, but sometimes you want to roll your own.
+The simplest way is to call the helper method on onDeviceReady:
+```javascript
+    onDeviceReady: function() {
+		...
+        cordova.plugins.inBeacon.askPermissions(function () {}, function (error) {});
+    },
+```
+
 
 ## Testing the application with beacons
 Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 
