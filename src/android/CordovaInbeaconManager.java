@@ -197,7 +197,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
 				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
-				String val=userPropertyService.getPropertyString(key,'');
+				String val=userPropertyService.getPropertyString(key);
 				callbackContext.sendPluginResult(val);
 				callbackContext.success();
             }
