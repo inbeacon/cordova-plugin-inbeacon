@@ -120,7 +120,10 @@ static NSString *const IO_OUT = @"o";
 		if (value!=nil) {
 			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: value];
 		}
-		
+		NSNumber *nval = [InbeaconSdk.sharedInstance userNumberForKey: key];
+		if (nval!=nil) {
+			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDouble: [nval doubleValue]];
+		}
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"property not found"];
 	} :command];
 }
