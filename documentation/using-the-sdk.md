@@ -178,9 +178,15 @@ As of version 2 of the plugin, refresh is done automatically, and you do not nee
 </table>
 
 
-Example:
+To handle an InBeacon event just add a new event listener.
 
-```javascript
-document.addEventListener('inbeacon.appevent', handleAppEvent, false);function handleAppEvent(event){    console.log('Event name:' + event.name);    console.log('Event data:' + JSON.stringify(event.data));}
 ```
+document.addEventListener('inbeacon.appevent', handleAppEvent, false);
+
+function handleAppEVent(event){
+    console.log('Event name:' + event.name);
+    console.log('Event data:' + JSON.stringify(event.data));
+}
+```
+
 

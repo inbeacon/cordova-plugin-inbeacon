@@ -44,52 +44,6 @@ Go to the inbeacon backend and create a region, a location and a beacon to set u
 
 Reload your app to make sure it refreshes, and you should be able to get beacon interactions in your app with this campaign. 
 
-## Features
 
-#### Features available on both Android and iOS
-
-##### API calls
-
- * putProperties 
- * attachUser (legacy version of putProperties)
- * getProperty
- * checkCapabilitiesAndRights
- * triggerCustomEvent
- * setLogLevel 
- * refresh
-
-##### API events
-
- * inbeacon.appevent
-
-#### Features exclusive to iOS
-
-##### API calls
-
- * checkCapabilitiesAndRightsWithAlert
-
-#### Feature exclusive to Android
-
-##### API call
-
- * askPermissions
-
-#### initialize
-
-The sdk is automatically initialized when the plugin is installed with the correct client-id and client-secret.
-
-
-#### events
-
-To handle an InBeacon event just add a new event listener.
-
-```
-document.addEventListener('inbeacon.appevent', handleAppEvent, false);
-
-function handleAppEVent(event){
-    console.log('Event name:' + event.name);
-    console.log('Event data:' + JSON.stringify(event.data));
-}
-```
 
 

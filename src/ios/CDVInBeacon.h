@@ -19,7 +19,6 @@
 
 #import <Cordova/CDV.h>
 #import <Foundation/Foundation.h>
-//#import <inBeaconSdk/inBeaconSdk.h>
 #import <InbeaconSdk/InbeaconSdk.h>
 
 typedef CDVPluginResult* (^CDVPluginCommandHandler)(CDVInvokedUrlCommand*);
@@ -35,6 +34,11 @@ typedef CDVPluginResult* (^CDVPluginCommandHandler)(CDVInvokedUrlCommand*);
 - (void)initialize:(CDVInvokedUrlCommand*)command;
 - (void)refresh:(CDVInvokedUrlCommand*)command;
 - (void)setLogLevel:(CDVInvokedUrlCommand*)command;
+
+- (void)putProperties:(CDVInvokedUrlCommand*)command;
+- (void)getProperty:(CDVInvokedUrlCommand*)command;
+- (void)triggerCustomEvent:(CDVInvokedUrlCommand*)command;
+- (void)askPermissions:(CDVInvokedUrlCommand*)command;
 
 - (void)attachUser:(CDVInvokedUrlCommand*)command;
 - (void)detachUser:(CDVInvokedUrlCommand*)command;
