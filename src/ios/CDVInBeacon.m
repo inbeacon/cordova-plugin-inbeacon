@@ -87,8 +87,6 @@ static NSString *const IO_OUT = @"o";
 					[InbeaconSdk.sharedInstance setUserNumber: value forKey: key];
 				}
 			}
-			//[[InbeaconSdk getInstance] attachUser:userInfo];
-			//[[InbeaconSdk getInstance] refresh];
 		}
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -108,11 +106,22 @@ static NSString *const IO_OUT = @"o";
 					[InbeaconSdk.sharedInstance setUserNumber: value forKey: key];
 				}
 			}
-			//[[InbeaconSdk getInstance] attachUser:userInfo];
-			//[[InbeaconSdk getInstance] refresh];
 		}
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+	} :command];
+}
+
+- (void) getProperty:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+	
+		NSString* key = command.arguments[0];
+		NSString *value = [InbeaconSdk.sharedInstance userStringForKey: key];
+		if (value!=nil) {
+			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: value];
+		}
+		
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"property not found"];
 	} :command];
 }
 
