@@ -210,7 +210,7 @@ public class CordovaInbeaconManager extends CordovaPlugin {
 					}
 					// must be double
 					Double dval=userPropertyService.getPropertyDouble(key);
-					callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, dval ));
+					callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, (float) dval ));
 					return;
 				}	
 				callbackContext.error("Property does not exist");
