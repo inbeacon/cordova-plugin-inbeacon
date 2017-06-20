@@ -2,44 +2,24 @@
 //  inBeaconSdk.h
 //  inBeaconSdk
 //
-//  * @author Ronald van Woensel
-//  * @author Zarko Kiroski
-//  * @author Goran Dimitrovski
+//  Created by rvw on 22-3-2016.
+//  Copyright © 2016 inBeacon. All rights reserved.
 //
-//  Copyright (c) 2014 inBeacon. All rights reserved.
-//
-#import <Foundation/Foundation.h>
-@import UIKit;
+
+#import <UIKit/UIKit.h>
+
+//! Project version number for inBeaconSdk.
+FOUNDATION_EXPORT double InbeaconSdkVersionNumber;
+
+//! Project version string for inBeaconSdk.
+FOUNDATION_EXPORT const unsigned char InbeaconSdkVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <inBeaconSdk/PublicHeader.h>
+// #import <InbeaconSdk/objcClass.h>
+#import <InbeaconSdk/Hmac.h>
+#import <InbeaconSdk/WebViewJavascriptBridge.h>
+#import <InbeaconSdk/KLCPopup.h>
 
 
 
-
-@interface inBeaconSdk : NSObject
-
-// singleton factory
-+(inBeaconSdk *) getInstance;
-+(inBeaconSdk *) inbeaconWithClientID: (NSString *)clientId andClientSecret: (NSString *) clientSecret;
-
--(inBeaconSdk *)initWithClientID: (NSString *)clientId andClientSecret: (NSString *) clientSecret;
--(void) setClientID: (NSString *) clientId andClientSecret: (NSString *) clientSecret;
--(void) refreshWithForce: (BOOL) force;
--(void) refresh;
--(void) setLogLevel: (int) level;   // 0=off
--(void) setApiEndpointBeta: (BOOL) doBeta;  // internal use only
--(void) authorisationAutoEnhanceMode: (BOOL) autoEnhance; // internal use only
-
--(BOOL) checkCapabilitiesAndRights: (NSError **) pError;
--(void) checkCapabilitiesAndRightsWithAlert;
-
--(void) attachUser: (NSDictionary *) userinfo;
--(void) detachUser;
-
-- (NSArray *) getInRegions;
-- (NSArray *) getBeaconState;
-- (NSDictionary *) getDeviceInfo;
-
-- (BOOL)didReceiveLocalNotification:(UILocalNotification *)notification;
-
-- (void)modalclickWithClosebar: (BOOL) doclosebar;  // for internal testing only
-@end
 
