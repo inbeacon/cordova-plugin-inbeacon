@@ -17,7 +17,8 @@
  under the License.
  */
 
-#import <inBeaconSDK/inBeaconSDK.h>
+// #import <inBeaconSDK/inBeaconSDK.h>
+#import <InbeaconSdk/InbeaconSdk.h>
 #import "AppDelegate+CDVInBeacon.h"
 #import <objc/runtime.h>
 
@@ -63,13 +64,15 @@
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [[inBeaconSdk getInstance] setLogLevel:1];  // 0=none 1=error 2=log 3=info 4=debug
+    //[[inBeaconSdk getInstance] setLogLevel:1];  // 0=none 1=error 2=log 3=info 4=debug
+	[[InbeaconSdk getInstance] setLogLevel:1];  // 0=none 1=error 2=log 3=info 4=debug
     
     NSString *clientId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API clientId"];
     NSString *secret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API secret"];
     
-    if (clientId != nil && secret != nil && ![clientId  isEqual: @"your-clientid"] && ![secret  isEqual: @"your-secret"]) {
-        inBeaconSdk *inBeacon = [inBeaconSdk inbeaconWithClientID: clientId andClientSecret: secret];
+    if (clientId != nil && secret != nil) {
+        //inBeaconSdk *inBeacon = [inBeaconSdk inbeaconWithClientID: clientId andClientSecret: secret];
+		InbeaconSdk *inBeacon = [InbeaconSdk createWithClientID: clientId andClientSecret: secret]; 
         [inBeacon refresh];
     }
 
