@@ -18,7 +18,8 @@
  */
 
 #import "CDVInBeacon.h"
-#import <inBeaconSdk/inBeaconSdk.h>
+//#import <inBeaconSdk/inBeaconSdk.h>
+#import <InbeaconSdk/InbeaconSdk.h>
 
 static NSString *const IO_KEY = @"io";
 static NSString *const IO_IN = @"i";
@@ -32,30 +33,30 @@ static NSString *const IO_OUT = @"o";
 
 - (void)pluginInitialize
 {
-    [inBeaconSdk getInstance];
+    [InbeaconSdk getInstance];
 }
 
 # pragma mark - InBeaconSdk calls
 - (void) initialize:(CDVInvokedUrlCommand*)command{ 
     [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		
-		NSDictionary* kwargs = command.arguments[0];
-		NSString* clientId = [kwargs objectForKey:@"clientId"];
-		NSString* secret = [kwargs objectForKey:@"secret"];
-		if (clientId != nil && secret != nil) {
-			self.inBeacon = [inBeaconSdk inbeaconWithClientID: clientId andClientSecret: secret];
-		        [self.inBeacon refresh];	
-			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-		} else {
-			return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-		}
+		NSLog(@"Inbeacon initialize: Obsolete. Set plugin variable INBEACON_CLIENTID and INBEACON_SECRET in your config.xml ");
+		//NSDictionary* kwargs = command.arguments[0];
+		//NSString* clientId = [kwargs objectForKey:@"clientId"];
+		//NSString* secret = [kwargs objectForKey:@"secret"];
+		//if (clientId != nil && secret != nil) {
+		//	self.inBeacon = [InbeaconSdk inbeaconWithClientID: clientId andClientSecret: secret];
+		//        [self.inBeacon refresh];	
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+		//} else {
+		//return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+		//}
 	} :command :false];
 }
 
 - (void) refresh:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		
-		[self.inBeacon refresh];
+		[[InbeaconSdk getInstance] refresh];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command];
@@ -65,7 +66,7 @@ static NSString *const IO_OUT = @"o";
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		
 		int level = (int) [command.arguments objectAtIndex:0];
-		[self.inBeacon setLogLevel:level];
+		[[InbeaconSdk getInstance] setLogLevel:level];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command];
@@ -77,8 +78,8 @@ static NSString *const IO_OUT = @"o";
 	
 		NSDictionary* userInfo = command.arguments[0];
 		if([userInfo count] > 0){
-			[self.inBeacon attachUser:userInfo];
-			[self.inBeacon refresh];
+			[[InbeaconSdk getInstance] attachUser:userInfo];
+			[[InbeaconSdk getInstance] refresh];
 		}
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -88,7 +89,7 @@ static NSString *const IO_OUT = @"o";
 - (void) detachUser:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		
-		[self.inBeacon detachUser];
+		[[InbeaconSdk getInstance] detachUser];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command];
@@ -98,7 +99,7 @@ static NSString *const IO_OUT = @"o";
 - (void) checkCapabilitiesAndRights:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		NSError* error;
-		if(![[inBeaconSdk getInstance] checkCapabilitiesAndRights:&error]) {
+		if(![[InbeaconSdk getInstance] checkCapabilitiesAndRights:&error]) {
 			
 			return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.userInfo[@"description"]];
 		} else {
@@ -109,7 +110,7 @@ static NSString *const IO_OUT = @"o";
 
 - (void) checkCapabilitiesAndRightsWithAlert:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		[[inBeaconSdk getInstance] checkCapabilitiesAndRightsWithAlert];
+		[[InbeaconSdk getInstance] checkCapabilitiesAndRightsWithAlert];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command :false];
@@ -117,7 +118,7 @@ static NSString *const IO_OUT = @"o";
 
 - (void) getInRegions:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		NSArray *currentRegions = [[inBeaconSdk getInstance]  getInRegions];
+		NSArray *currentRegions = [[InbeaconSdk getInstance]  getInRegions];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:currentRegions];
 	} :command];
@@ -125,7 +126,7 @@ static NSString *const IO_OUT = @"o";
 
 - (void) getBeaconState:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-		NSArray *beaconState = [[inBeaconSdk getInstance] getBeaconState];
+		NSArray *beaconState = [[InbeaconSdk getInstance] getBeaconState];
 		
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:beaconState];
 	} :command];
