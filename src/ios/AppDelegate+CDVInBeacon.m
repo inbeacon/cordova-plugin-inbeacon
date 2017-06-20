@@ -70,8 +70,11 @@
     NSString *secret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API secret"];
     
     if (clientId != nil && secret != nil) {
-		InbeaconSdk *inBeacon = [InbeaconSdk createWithClientID: clientId andClientSecret: secret]; 
+		[InbeaconSdk createWithClientID: clientId andClientSecret: secret]; 
     }
+	else {
+		NSLog(@"INBEACON SDK NOT INITIALIZED: CLIENTID AND/OR CLIENTSECRET NOT DEFINED");
+	}
 
     return [self xxx_application:application didFinishLaunchingWithOptions:launchOptions];
 }
