@@ -1,0 +1,10 @@
+framework module InbeaconSdk {
+  umbrella header "InbeaconSdk.h"
+
+  export *
+  module * { export * }
+}
+
+module InbeaconSdk.Swift {
+    header "InbeaconSdk-Swift.h"
+}
