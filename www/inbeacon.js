@@ -170,6 +170,18 @@ InBeacon.prototype.getProperty = function(key, successCallback, errorCallback){
     exec(successCallback, errorCallback || null, "InBeacon", "getProperty", [key]);
 };
 
+/**
+ * trigger a custom event
+ *
+ * @param eventId (long)
+ * @param eventType (ONESHOT, IN, OUT)
+ * @param extra
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.triggerCustomEvent = function(eventId, eventType, extra, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "triggerCustomEvent", [eventId, eventType, extra]);
+};
 
 /**
  * Logout the current user. From now only anonymous info is send to inBeacon server. (OBSOLETE)

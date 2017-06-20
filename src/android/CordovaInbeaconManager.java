@@ -22,6 +22,7 @@ package com.inbeacon.cordova;
 import com.inbeacon.sdk.InbeaconManager;
 import com.inbeacon.sdk.Base.VerifiedCapability;
 import com.inbeacon.sdk.User.UserPropertyService;
+import com.inbeacon.sdk.Custom.EventType;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -120,6 +121,8 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             putUserProperties(args.optJSONObject(0),callbackContext);	
 		} else if ("getProperty".equals(action)) {
             getUserProperty(args.getString(0),callbackContext);
+		} else if ("triggerCustomEvent".equals(action)) {
+			triggerCustomEvent(args.getLong(0),args.getString(1),args.getString(2),callbackContext);
 		}
 		// legacy
         else if ("initialize".equals(action)) {
@@ -217,6 +220,22 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             }
         });
     }
+	
+    private void triggerCustomEvent(final Long eventId, final String eventType, final String extra, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				EventType evType=EventType.ONESHOT;
+				if (eventType.equalsIgnoreCase("in"))
+					evType = EventType.IN;
+				if (eventType.equalsIgnoreCase("out"))
+					evType = EventType.OUT;
+				InbeaconManager.getInstance().triggerCustomEvent(eventId, evType , extra);
+				callbackContext.success();
+            }
+        });
+    }
+	
+	// obsolete
     private void detachUser(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
