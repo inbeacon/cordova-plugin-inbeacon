@@ -197,9 +197,23 @@ public class CordovaInbeaconManager extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
 				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
-				String val=userPropertyService.getPropertyString(key);
-				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, val));
-				//callbackContext.success();
+				if (userPropertyService.hasProperty(key)) {
+					String val=userPropertyService.getPropertyString(key,null);
+					if (val!=null) {
+						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, val));
+						return;
+					}
+					Long lval=userPropertyService.getPropertyLong(key,Long.MIN_VALUE);
+					if (lval!=Long.MIN_VALUE) {
+						callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, lval));
+						return;
+					}
+					// must be double
+					Double dval=userPropertyService.getPropertyDouble(key);
+					callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, dval ));
+					return;
+				}	
+				callbackContext.error("Property does not exist");
             }
         });
     }
