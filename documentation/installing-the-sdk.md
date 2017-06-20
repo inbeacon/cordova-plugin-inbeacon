@@ -12,6 +12,14 @@ cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git
 
 You need to include the clientId and the clientSecret as parameters
 
+If you want to install an older version, add #<tag> to the plugin url. Example:
+	
+```bash
+cordova plugin add https://github.com/inbeacon/cordova-plugin-inbeacon.git#1.1.3 
+   --variable INBEACON_CLIENTID="your-clientid" 
+   --variable INBEACON_SECRET="your-secret"
+```
+
 
 You can also enter the variables in the fetch.json file in the plugins directory later:
 

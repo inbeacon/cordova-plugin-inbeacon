@@ -1,37 +1,7 @@
 
 # Getting Started
 
-Both the Android and the iOS parts of this component can be implemented in a Cordova project by following the regular instructions for [Android](https://github.com/inbeacon/InbeaconSdk-android) and [iOS](https://github.com/inbeacon/InbeaconSdk-IOS) native apps as provided by inBeacon
-
 These instructions assume you already have an account at[ inBeacon](https://inbeacon.nl/) and are in possession of an Client ID and Client Secret. You can find your client-ID and client-Secret in your [account overview](https://console.inbeacon.nl/account) 
-
-## Android details
-
-### Add required permissions to the manifest
-
-In the Properties/AndroidManifest.xml, add the following permissions:
-
-```xml
-<uses-permission android:name="android.permission.BLUETOOTH" /> 
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> 
-<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-```
-Also add the following inside the <application></application> block:
-
-```xml
-<receiver android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver">
-	<intent-filter>
-		<action android:name="android.intent.action.BOOT_COMPLETED" />
-		<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-		<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-	</intent-filter>
-</receiver>
-
-<service android:enabled="true" android:exported="false" android:isolatedProcess="false" android:label="beacon" android:name="org.altbeacon.beacon.service.BeaconService" />
-
-<service android:name="org.altbeacon.beacon.BeaconIntentProcessor" android:enabled="true" android:exported="false" />
-```
 
 ## iOS details
 
@@ -63,6 +33,23 @@ When the SDK is integrated, there are a few permissions needed from the user. If
 
 There are three fundamentally different ways to run the inBeacon SDK:
 
+
+
+* Restricted background mode. (default)
+	If you don’t specify background modes, the app runs in restricted background mode. Restricted background mode notices ALL beacon regions enter/exit, even when the app is terminated or suspended (just like full background mode), but stops checking beacon proximity in the background 3 minutes after entering the region (location) 
+
+	This means that if a user is approaching an iBeacon within a region more than 3 minutes after entering the region, triggers will no longer work when the app is in the background. 
+
+
+	Advantages:
+	
+	* App submission to the app store is without issues about background location scanning
+	* Battery power use is limited even more.
+
+	Disadvantages:
+	
+	* This limits the app to a maximum of 3 minutes background processing when the app enters or leaves a beacon region. 
+
 * full background mode
 	For iOS, full background mode requires extra location background settings so the app is able to run continuously  in the background during iBeacon ranging. 
 
@@ -74,23 +61,7 @@ There are three fundamentally different ways to run the inBeacon SDK:
 	* the app description in the app-store needs to include the following: "Note: Continued use of GPS and [app name] running in the background can dramatically decrease battery life. [app name] will automatically shut down if you run it in the background and leave [description of location where ibeacons are used]."
 	* Possibility of initial app rejection by iTunes connect (apple appstore). However in the past we were able to get all apps approved, even with full background mode ON.
 	* The app uses a bit more battery power when inside beacon regions. Because location monitoring is set for least-accurate, GPS is not used by the SDK. We found that the decrease of battery life is negligible.
-
-* Restricted background mode. 
-	If you don’t specify background modes, the app runs in restricted background mode. Restricted background mode notices ALL beacon regions enter/exit, even when the app is terminated or suspended (just like full background mode), but stops checking beacon proximity in the background 3 minutes after entering the region (location) 
-
-	This means that if a user is approaching an iBeacon within a region more than 3 minutes after entering the region, triggers will no longer work when the app is in the background. 
-
-
-	Advantages:
-	
-	* App submission to the app store is without issues about background location scanning
-Battery power use is limited even more.
-
-	Disadvantages:
-	
-	* This limits the app to a maximum of 3 minutes background processing when the app enters or leaves a beacon region. 
-
-	
+		
 * Geofenced Location Authorisation mode. In this mode the app starts by only asking for "when in use" location permissions. Only when the user enters a predefined geofenced region, the app will ask for full (background) location permissions. Geofenced Location Authorisation is defined on the inBeacon backend. 
 
 	Advantages:
@@ -103,7 +74,7 @@ Battery power use is limited even more.
 
 
 
-Using full, restricted background mode or Geofenced Location Autorisation mode depends on your specific situation.
+Using full, restricted background mode or Geofenced Location Autorisation mode depends on your specific situation. For most applications, Restricted background mode is ok.
 
 ### App store submission
 
@@ -131,23 +102,19 @@ in Dutch:
 
 ### Update Info.plist
 
-iOS requires a text that explain why the app should be allowed to use the location services. Add the following keys to the Info.plist file and supply a string value with an explanation:
+iOS requires a text that explain why the app should be allowed to use the location services. Add the following keys to the config.xml file and supply a string value with an explanation:
 
 ```xml
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>To detect iBeacons</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To detect iBeacons</string>
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>This app would like to get your location even when in the background.</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>This app would like to get your location, but only when the app is active.</string>
+        </config-file>
 ```
 
-If you want the inBeacon platform to run in continuous background mode see above), go to the bottom of the Info.plist file editor (section 'Background modes'), enable 'Enable Background Modes' and check 'Location updates'.
+If you want the inBeacon platform to run in continuous background mode see above), load your iOS project into Xcode and enable 'Enable Background Modes' and check 'Location updates'.
 
-```xml
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
-```
 
 ### Include audio resources
 

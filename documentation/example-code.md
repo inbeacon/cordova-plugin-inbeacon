@@ -18,18 +18,7 @@ There is also a [complete example project available](https://github.com/inbeacon
 
 ## Standard application
 
-For the most common implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
-
-```
-onDeviceReady: function() {
-	app.receivedEvent('deviceready');
-	cordova.plugins.inBeacon.refresh(function(){
-		console.log('refresh done!');
-	}, function () {
-		console.error('refresh failed');
-	});
-},
-```
+Just add the plugin and you're good to go.
 
 ## Testing the application with beacons
 Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 

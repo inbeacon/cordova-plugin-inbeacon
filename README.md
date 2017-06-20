@@ -29,7 +29,7 @@ You need to include the clientId and the clientSecret as parameters
 
 ## Standard application
 
-For the most common implementation, just include the plugin and your're ready.
+Just include the plugin and your're ready.
 
 ## Testing the application with beacons
 Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 
