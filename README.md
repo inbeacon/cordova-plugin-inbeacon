@@ -5,6 +5,10 @@
 
 This plugin enables the InBeacon API for Cordova based apps on iOS and Android.
 
+## Requirements
+
+For iOS, Only supported with the combination of cordova-ios@4.4.0 and cordova-cli@7.0.0 or higher (swift support needed)
+
 ## Documentation
 
 Read the [full documentation](documentation/README.md)
