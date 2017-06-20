@@ -25,20 +25,7 @@ You need to include the clientId and the clientSecret as parameters
 
 ## Standard application
 
-For the most common implementation, in index.js just do a refresh in onDeviceReady of your app object, like this:
-
-```
-onDeviceReady: function() {
-	app.receivedEvent('deviceready');
-	cordova.plugins.inBeacon.refresh(function(){
-		console.log('refresh done!');
-	}, function () {
-		console.error('refresh failed');
-	});
-},
-```
-
-and integration with inBeaocon is ready.
+For the most common implementation, just include the plugin and your're ready.
 
 ## Testing the application with beacons
 Go to the inbeacon backend and create a region, a location and a beacon to set up your beacon infrastructure. Now create a campaign with a beacon trigger, a notification action and a textview. 
@@ -51,10 +38,13 @@ Reload your app to make sure it refreshes, and you should be able to get beacon 
 
 ##### API calls
 
- * refresh
- * attachUser
- * detachUser
+ * putProperties 
+ * attachUser (legacy version of putProperties)
+ * getProperty
  * checkCapabilitiesAndRights
+ * triggerCustomEvent
+ * setLogLevel 
+ * refresh
 
 ##### API events
 
@@ -64,7 +54,6 @@ Reload your app to make sure it refreshes, and you should be able to get beacon 
 
 ##### API calls
 
- * setLogLevel
  * checkCapabilitiesAndRightsWithAlert
 
 #### Feature exclusive to Android
@@ -77,31 +66,6 @@ Reload your app to make sure it refreshes, and you should be able to get beacon 
 
 The sdk is automatically initialized when the plugin is installed with the correct client-id and client-secret.
 
-#### refresh
-
-```
-cordova.plugins.inBeacon.refresh(function(){
-        console.log('refresh done!');
-    }, function () {
-        console.error('refresh failed');
-    });
-```
-
-#### attachUser
-
-Attach local userinformation to inbeacon. For instance, the user might enter account information in the app. It is also possible not to attach a user, in that case the device is anonymous.
-
-```
-var userInfo = {
-    name  : 'Dwight Schultz',
-    email : 'dwight@ateam.com'
-};
-cordova.plugins.inBeacon.attachUser(userInfo, function () {
-        console.log('Succesfully attached user');
-    }, function () {
-        console.error('Failed to attach user');
-    });
-```
 
 #### events
 

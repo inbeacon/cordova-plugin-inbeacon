@@ -61,7 +61,7 @@
 
         <framework src="CoreBluetooth.framework"/>
         <framework src="CoreLocation.framework"/>
-        <framework src="libs/ios/inBeaconSdk.framework" custom="true"/>
+        <framework src="libs/ios/InbeaconSdk.framework" custom="true" embed="true"/>
 
     </platform>
 
