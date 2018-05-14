@@ -17,7 +17,7 @@
     </engines>
 	
 	<!-- swift support needed https://github.com/akofman/cordova-plugin-add-swift-support -->
-	<dependency id="cordova-plugin-add-swift-support" version="1.6.1"/>
+	<dependency id="cordova-plugin-add-swift-support" version="^1.7.2"/>
 
     <!-- Plugin source code: Core -->
     <js-module name="inBeacon" src="www/inbeacon.js">
