@@ -37,6 +37,10 @@ typedef CDVPluginResult* (^CDVPluginCommandHandler)(CDVInvokedUrlCommand*);
 
 - (void)putProperties:(CDVInvokedUrlCommand*)command;
 - (void)getProperty:(CDVInvokedUrlCommand*)command;
+- (void)hasTag:(CDVInvokedUrlCommand *)command;
+- (void)setTag:(CDVInvokedUrlCommand *)command;
+- (void)resetTag:(CDVInvokedUrlCommand *)command;
+
 - (void)getPPID:(CDVInvokedUrlCommand *)command;
 - (void)setPPID:(CDVInvokedUrlCommand *)command;
 

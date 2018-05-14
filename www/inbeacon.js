@@ -162,12 +162,45 @@ InBeacon.prototype.putProperties = function(userInfo, successCallback, errorCall
 /**
  * get User property (2.0)
  *
- * @param userInfo
+ * @param key
  * @param successCallback
  * @param errorCallback
  */
 InBeacon.prototype.getProperty = function(key, successCallback, errorCallback){
     exec(successCallback, errorCallback || null, "InBeacon", "getProperty", [key]);
+};
+
+/**
+ * has Tag (2.0)
+ *
+ * @param tag
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.hasTag = function(tag, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "hasTag", [tag]);
+};
+
+/**
+ * set Tag (2.0)
+ *
+ * @param tag
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.setTag = function(tag, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "setTag", [tag]);
+};
+
+/**
+ * reset Tag (2.0)
+ *
+ * @param tag
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.resetTag = function(tag, successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "resetTag", [tag]);
 };
 
 /**

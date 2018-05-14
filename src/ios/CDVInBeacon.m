@@ -128,6 +128,30 @@ static NSString *const IO_OUT = @"o";
 	} :command];
 }
 
+- (void) hasTag:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		NSString *tag = command.arguments[0];
+		BOOL rv = [InbeaconSdk.sharedInstance userHasTag: tag];
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool: rv];
+	} :command];
+}
+
+- (void) setTag:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		NSString *tag = command.arguments[0];
+		[InbeaconSdk.sharedInstance userSetTag: tag];
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+	} :command];
+}
+
+- (void) resetTag:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		NSString *tag = command.arguments[0];
+		[InbeaconSdk.sharedInstance userResetTag: tag];
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+	} :command];
+}
+
 - (void) getPPID:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 	
