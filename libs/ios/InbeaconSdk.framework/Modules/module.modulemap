@@ -7,4 +7,5 @@ framework module InbeaconSdk {
 
 module InbeaconSdk.Swift {
     header "InbeaconSdk-Swift.h"
+    requires objc
 }

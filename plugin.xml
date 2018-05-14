@@ -11,9 +11,9 @@
     <repo>https://github.com/inbeacon/cordova-plugin-inbeacon.git</repo>
 
     <engines>
-        <engine name="cordova-android" version=">=3.6.4"/>
+        <engine name="cordova-android" version=">=6.0.0"/>
         <engine name="cordova-plugman" version=">=4.2.0"/><!-- needed for gradleReference support -->
-        <engine name="cordova-ios" version=">=4.4.0"/>
+        <engine name="cordova-ios" version=">=4.5.0"/>
     </engines>
 	
 	<!-- swift support needed https://github.com/akofman/cordova-plugin-add-swift-support -->
@@ -54,7 +54,7 @@
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
             <string>This app would like to get your location, but only when the app is active.</string>
         </config-file>
-		<config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUsageDescription">
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
 			<string>This app would like to get your location in the background. Please select background in the list</string>
 		</config-file>
 
