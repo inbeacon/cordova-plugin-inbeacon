@@ -171,6 +171,29 @@ InBeacon.prototype.getProperty = function(key, successCallback, errorCallback){
 };
 
 /**
+ * get PPID
+ *
+ * @param userInfo
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.getPPID = function(successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "getPPID", []);
+};
+
+/**
+ * set PPID
+ *
+ * @param userInfo
+ * @param successCallback
+ * @param errorCallback
+ */
+InBeacon.prototype.setPPID = function(ppid,successCallback, errorCallback){
+    exec(successCallback, errorCallback || null, "InBeacon", "setPPID", [ppid]);
+};
+
+
+/**
  * trigger a custom event
  *
  * @param eventId (long)

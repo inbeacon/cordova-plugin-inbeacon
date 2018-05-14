@@ -128,6 +128,25 @@ static NSString *const IO_OUT = @"o";
 	} :command];
 }
 
+- (void) getPPID:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+	
+		NSString *value = InbeaconSdk.sharedInstance.PPID;
+		if (value!=nil) {
+			return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: value];
+		}
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"PPID not found"];
+	} :command];
+}
+
+- (void) setPPID:(CDVInvokedUrlCommand *)command {
+	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
+		NSString* ppid = command.arguments[0];
+		InbeaconSdk.sharedInstance.PPID=ppid;
+		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+	} :command];
+}
+
 - (void) triggerCustomEvent:(CDVInvokedUrlCommand *)command {
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"Not yet available on iOS"];
