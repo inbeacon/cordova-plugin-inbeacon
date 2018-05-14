@@ -66,8 +66,14 @@ static NSString *const IO_OUT = @"o";
 	[self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
 		
 		int level = (int) [command.arguments objectAtIndex:0];
-		[[InbeaconSdk getInstance] setLogLevel:level];
-		
+		switch(level) {
+		case 0:	InbeaconSdk.sharedInstance.logLevel =InbLogLevelNone; break;
+		case 1: InbeaconSdk.sharedInstance.logLevel =InbLogLevelError; break;
+		case 2: InbeaconSdk.sharedInstance.logLevel =InbLogLevelWarning; break;
+		case 3: InbeaconSdk.sharedInstance.logLevel =InbLogLevelInfo; break;
+		case 4: InbeaconSdk.sharedInstance.logLevel =InbLogLevelDebug; break;
+		default:	InbeaconSdk.sharedInstance.logLevel =InbLogLevelVerbose; break;		
+		}
 		return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	} :command];
 

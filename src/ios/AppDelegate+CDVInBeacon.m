@@ -95,7 +95,7 @@
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-	[[InbeaconSdk getInstance] setLogLevel:1];  // 0=none 1=error 2=log 3=info 4=debug
+	InbeaconSdk.sharedInstance.logLevel =InbLogLevelError;  // 
     
     NSString *clientId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API clientId"];
     NSString *secret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API secret"];
@@ -106,19 +106,26 @@
 	else {
 		NSLog(@"INBEACON SDK NOT INITIALIZED: CLIENTID AND/OR CLIENTSECRET NOT DEFINED");
 	}
-
+	// this is NOT an infinite loop! (see swizzle logic)
     return [self xxx_application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void) xxx_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[InbeaconSdk getInstance] didReceiveLocalNotification:notification];   // make sure local notifications pass through the inbeacon SDK
+	// this is NOT an infinite loop! (see swizzle logic)
+	[self xxx_application:application didReceiveLocalNotification: notification];
 }
 
 - (void)xxx_userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)(void))completionHandler {
          
-    [[InbeaconSdk getInstance] didReceiveUserNotification: response.notification];
+    if (![[InbeaconSdk getInstance] didReceiveUserNotification: response.notification]) {
+		// this is NOT an infinite loop! (see swizzle logic)
+		[self xxx_userNotificationCenter:center didReceiveNotificationResponse: response withCompletionHandler:completionHandler ]; 
+		return;  	
+    }
+	completionHandler();
 }
 
 - (void)xxx_userNotificationCenter:(UNUserNotificationCenter *)center
