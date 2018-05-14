@@ -61,11 +61,11 @@
         }
 		
 		// usernotification
-        SEL selectorForUserNotification = @selector(userNotificationCenter:willPresentNotification:withCompletionHandler:);
-        SEL swizzledSelectorForUserNotification = @selector(xxx_userNotificationCenter:willPresentNotification:withCompletionHandler:);
+        SEL selectorForUserNotification = @selector(userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:);
+        SEL swizzledSelectorForUserNotification = @selector(xxx_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:);
         
-        Method methodForUserNotification = class_getInstanceMethod(class, selectorForNotification);
-        Method swizzledMethodForUserNotification = class_getInstanceMethod(class, swizzledSelectorForNotification);
+        Method methodForUserNotification = class_getInstanceMethod(class, selectorForUserNotification);
+        Method swizzledMethodForUserNotification = class_getInstanceMethod(class, swizzledSelectorForUserNotification);
         
         BOOL didAddMethodForUserNotification = class_addMethod(class, selectorForUserNotification, method_getImplementation(swizzledMethodForUserNotification), method_getTypeEncoding(swizzledMethodForUserNotification));
         
@@ -74,7 +74,21 @@
         } else {
             method_exchangeImplementations(methodForUserNotification, swizzledMethodForUserNotification);
         }
+		
+		// usernotificationwillpresent
+        SEL selectorForUserNotificationWillPresent = @selector(userNotificationCenter:willPresentNotification:withCompletionHandler:);
+        SEL swizzledSelectorForUserNotificationWillPresent = @selector(xxx_userNotificationCenter:willPresentNotification:withCompletionHandler:);
         
+        Method methodForUserNotificationWillPresent = class_getInstanceMethod(class, selectorForUserNotificationWillPresent);
+        Method swizzledMethodForUserNotificationWillPresent = class_getInstanceMethod(class, swizzledSelectorForUserNotificationWillPresent);
+        
+        BOOL didAddMethodForUserNotificationWillPresent = class_addMethod(class, selectorForUserNotificationWillPresent, method_getImplementation(swizzledMethodForUserNotificationWillPresent), method_getTypeEncoding(swizzledMethodForUserNotificationWillPresent));
+        
+        if (didAddMethodForUserNotificationWillPresent) {
+            class_replaceMethod(class, swizzledSelectorForUserNotificationWillPresent, method_getImplementation(methodForUserNotificationWillPresent), method_getTypeEncoding(methodForUserNotificationWillPresent));
+        } else {
+            method_exchangeImplementations(methodForUserNotificationWillPresent, swizzledMethodForUserNotificationWillPresent);
+        }    
         
     });
 }
