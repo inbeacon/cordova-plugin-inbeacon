@@ -44,7 +44,8 @@
         } else {
             method_exchangeImplementations(originalMethod, swizzledMethod);
         }
- 
+		
+ 	    // localnotification
         SEL selectorForNotification = @selector(application:didReceiveLocalNotification:);
         SEL swizzledSelectorForNotification = @selector(xxx_application:didReceiveLocalNotification:);
         
@@ -58,6 +59,22 @@
         } else {
             method_exchangeImplementations(methodForNotification, swizzledMethodForNotification);
         }
+		
+		// usernotification
+        SEL selectorForUserNotification = @selector(userNotificationCenter:willPresentNotification:withCompletionHandler:);
+        SEL swizzledSelectorForUserNotification = @selector(xxx_userNotificationCenter:willPresentNotification:withCompletionHandler:);
+        
+        Method methodForUserNotification = class_getInstanceMethod(class, selectorForNotification);
+        Method swizzledMethodForUserNotification = class_getInstanceMethod(class, swizzledSelectorForNotification);
+        
+        BOOL didAddMethodForUserNotification = class_addMethod(class, selectorForUserNotification, method_getImplementation(swizzledMethodForUserNotification), method_getTypeEncoding(swizzledMethodForUserNotification));
+        
+        if (didAddMethodForUserNotification) {
+            class_replaceMethod(class, swizzledSelectorForUserNotification, method_getImplementation(methodForUserNotification), method_getTypeEncoding(methodForUserNotification));
+        } else {
+            method_exchangeImplementations(methodForUserNotification, swizzledMethodForUserNotification);
+        }
+        
         
     });
 }
@@ -81,6 +98,22 @@
 
 - (void) xxx_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[InbeaconSdk getInstance] didReceiveLocalNotification:notification];   // make sure local notifications pass through the inbeacon SDK
+}
+
+- (void)xxx_userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)(void))completionHandler {
+         
+    [[InbeaconSdk getInstance] didReceiveUserNotification: response.notification];
+}
+
+- (void)xxx_userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+         
+    completionHandler( UNNotificationPresentationOptionSound | 
+						UNNotificationPresentationOptionBadge | 
+						UNNotificationPresentationOptionAlert );
 }
     
 @end

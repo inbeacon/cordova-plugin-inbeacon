@@ -18,10 +18,12 @@
  */
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate (CDVInBeacon)
+@interface AppDelegate (CDVInBeacon) <UNUserNotificationCenterDelegate>
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void) xxx_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification; 
-
+- (void) xxx_userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void)) completionHandler;
+         
 @end
