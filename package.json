@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-inbeacon",
-  "version": "2.0.0",
-  "description": "inBeacon plugin",
+  "version": "2.1.0",
+  "description": "Resono/inBeacon plugin",
   "cordova": {
     "id": "cordova-plugin-inbeacon",
     "platforms": [
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twogather/cordova-plugin-inbeacon.git"
+    "url": "git+https://github.com/inbeacon/cordova-plugin-inbeacon.git"
   },
   "keywords": [
     "cordova",

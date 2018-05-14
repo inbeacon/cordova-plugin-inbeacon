@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- note: keep version on the same line for makesdk -->
-<plugin id="cordova-plugin-inbeacon" version="2.0.1"
+<plugin id="cordova-plugin-inbeacon" version="2.1.0"
         xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <name>inBeacon Plugin</name>
-    <description>inBeacon cordova plugin supporting inBeacon SDK</description>
+    <name>Resono/inBeacon Plugin</name>
+    <description>Resono cordova plugin supporting Resono/inBeacon SDK</description>
     <license>Apache 2.0</license>
     <keywords>cordova,inbeacon,ibeacon,beacon,bluetooth,le</keywords>
     <repo>https://github.com/inbeacon/cordova-plugin-inbeacon.git</repo>
@@ -29,8 +29,8 @@
         <preference name="INBEACON_SECRET" default="your-secret"/>
 
         <info>
-            In order to run this plugin, you need to obtain your clientId and secret from InBeacon.
-            Visit to https://console.inbeacon.nl
+            In order to run this plugin, you need to obtain your clientId and secret from Resono.
+            Visit to https://console.resono.io
         </info>
 
         <config-file parent="/*" target="config.xml">
@@ -54,7 +54,9 @@
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
             <string>This app would like to get your location, but only when the app is active.</string>
         </config-file>
-
+		<config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUsageDescription">
+			<string>This app would like to get your location in the background. Please select background in the list</string>
+		</config-file>
 
         <header-file src="src/ios/CDVInBeacon.h"/>
         <source-file src="src/ios/CDVInBeacon.m"/>
@@ -83,7 +85,7 @@
             <uses-permission android:name="android.permission.BLUETOOTH"/>
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
             <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
         </config-file>
 
         <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
