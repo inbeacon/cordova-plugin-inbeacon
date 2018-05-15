@@ -4,6 +4,11 @@
 * askPermissions
 * putProperties
 * getProperty
+* hasTag
+* setTag
+* resetTag
+* getPPID
+* setPPID
 * checkCapabilitiesAndRights
 * triggerCustomEvent
 * setLogLevel 
@@ -83,6 +88,8 @@ cordova.plugins.inBeacon.putProperties(userInfo, function () {
 });
 ```
 
+
+
 ### cordova.plugins.inBeacon.getProperty
 
 ```javascript
@@ -97,6 +104,50 @@ cordova.plugins.inBeacon.getProperty('name', function (value) {
     app.error('Failed');
 });
 ```
+
+### cordova.plugins.inBeacon.hasTag
+### cordova.plugins.inBeacon.setTag
+### cordova.plugins.inBeacon.resetTag
+
+Tags are a special type of userproperty that have a name and can be set or reset. Tags are reset by default.
+
+```javascript
+        cordova.plugins.inBeacon.hasTag('myTag',function(has) {
+			if (has) ...
+        },function(error){});
+		
+		cordova.plugins.inBeacon.setTag('myTag',function() {
+			// tag is now set
+	    },function(error){});	
+		
+		cordova.plugins.inBeacon.resetTag('myTag',function() {
+			// tag is now reset
+	    },function(error){});
+````
+
+
+### cordova.plugins.inBeacon.getPPID
+### cordova.plugins.inBeacon.setPPID
+
+An alternative for the IDFA is to roll your own Publisher Provided ID. If you use Doubleclick For Publishers (DFP), a PPID might be a better option than using an IDFA. 
+A PPID is a ID that is attached to the App on a Device that can be used for retargeting or identifing the app install on the device. (each app has a different PPID if installed on the same device)
+
+In addition to your own PPID's, the SDK will generate a unique ID, based on the device and app bundle. This can function as a PPID if you do not want to create your own. 
+This PPID will survive app re-installs. The PPID provided by the SDK will be a hashed (base64) value.
+
+See [Google DFP documentation on PPID's](https://support.google.com/dfp_premium/answer/2880055?hl=en)
+
+The PPID is available as a read/write property of the SDK instance:
+
+```javascript
+        cordova.plugins.inBeacon.getPPID(function(ppid) {
+                console.log('PPID = '+ppid);
+        },function (error) {});
+		
+        cordova.plugins.inBeacon.setPPID('your ppid', function() {
+               // PPID is now set to the specified value
+        },function (error) {});
+```		
 
 ### cordova.plugins.inBeacon.triggerCustomEvent
 
