@@ -45,12 +45,9 @@ The simplest way is to call the helper method on onDeviceReady:
 but you might postpone this question to a more appropriate moment.
 	
 ### cordova.plugins.inBeacon.putProperties
-### cordova.plugins.inBeacon.attachUser (legacy)
 
-Note:*attachUser is a legacy method and is now superseeded by putProperties. The usage of both methods is the same*
 
 ```javascript
-cordova.plugins.inBeacon.attachUser(userInfo,function cb(){});
 cordova.plugins.inBeacon.putProperties(userInfo, function cb(){});
 ```
 The inBeacon backend retains user information for each device. The user information consists of any number of properties that fall in any of the 3 categories:
