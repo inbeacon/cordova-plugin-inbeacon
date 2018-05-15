@@ -121,6 +121,16 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             putUserProperties(args.optJSONObject(0),callbackContext);	
 		} else if ("getProperty".equals(action)) {
             getUserProperty(args.getString(0),callbackContext);
+		} else if ("getPPID".equals(action)) {
+            getPPID(callbackContext);
+		} else if ("setPPID".equals(action)) {
+            setPPID(args.getString(0),callbackContext);
+		} else if ("hasTag".equals(action)) {
+            hasTag(args.getString(0),callbackContext);		
+		} else if ("setTag".equals(action)) {
+            setTag(args.getString(0),callbackContext);	
+		} else if ("resetTag".equals(action)) {
+            resetTag(args.getString(0),callbackContext);
 		} else if ("triggerCustomEvent".equals(action)) {
 			triggerCustomEvent(args.getLong(0),args.getString(1),args.getString(2),callbackContext);
 		}
@@ -220,7 +230,49 @@ public class CordovaInbeaconManager extends CordovaPlugin {
             }
         });
     }
-	
+    private void getPPID(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				String ppid=InbeaconManager.getInstance().getPPID();
+				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, ppid ));							
+            }
+        });				
+	}
+	private void setPPID(final String ppid, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				InbeaconManager.getInstance().setPPID(ppid);
+		        callbackContext.success();				
+            }
+        });	
+	}
+	private void hasTag(final String key, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
+				callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, userPropertyService.hasTag(key) ));		
+            }
+        });	
+	}
+	private void setTag(final String key, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
+				userPropertyService.setTag(key);
+		        callbackContext.success();				
+            }
+        });	
+	}
+	private void resetTag(final String key, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+				UserPropertyService userPropertyService= InbeaconManager.getInstance().getUserPropertyService();
+				userPropertyService.resetTag(key);
+		        callbackContext.success();			
+            }
+        });	
+	}
+
     private void triggerCustomEvent(final Long eventId, final String eventType, final String extra, final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
