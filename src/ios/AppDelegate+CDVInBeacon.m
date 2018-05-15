@@ -113,7 +113,7 @@
 - (void) xxx_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[InbeaconSdk getInstance] didReceiveLocalNotification:notification];   // make sure local notifications pass through the inbeacon SDK
 	// this is NOT an infinite loop! (see swizzle logic)
-	[self xxx_application:application didReceiveLocalNotification: notification];
+	//[self xxx_application:application didReceiveLocalNotification: notification];
 }
 
 - (void)xxx_userNotificationCenter:(UNUserNotificationCenter *)center
@@ -122,7 +122,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
          
     if (![[InbeaconSdk getInstance] didReceiveUserNotification: response.notification]) {
 		// this is NOT an infinite loop! (see swizzle logic)
-		[self xxx_userNotificationCenter:center didReceiveNotificationResponse: response withCompletionHandler:completionHandler ]; 
+		//[self xxx_userNotificationCenter:center didReceiveNotificationResponse: response withCompletionHandler:completionHandler ]; 
 		return;  	
     }
 	completionHandler();
