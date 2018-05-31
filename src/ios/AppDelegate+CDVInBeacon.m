@@ -107,7 +107,7 @@
 		NSLog(@"INBEACON SDK NOT INITIALIZED: CLIENTID AND/OR CLIENTSECRET NOT DEFINED");
 	}
     [inbeacon refreshWithForce: YES];
-    
+
 	// this is NOT an infinite loop! (see swizzle logic)
     return [self xxx_application:application didFinishLaunchingWithOptions:launchOptions];
 }
