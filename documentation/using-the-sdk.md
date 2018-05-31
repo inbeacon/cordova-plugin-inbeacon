@@ -14,12 +14,9 @@
 * setLogLevel 
 * refresh
 
-Legacy and obsolete methods
-* attachUser
-* detachUser
-
 
 iOS only methods
+
 * checkCapabilitiesAndRightsWithAlert (iOS only)
 * getInRegions (iOS only)
 * getBeaconState (iOS only)
@@ -45,7 +42,6 @@ The simplest way is to call the helper method on onDeviceReady:
 but you might postpone this question to a more appropriate moment.
 	
 ### cordova.plugins.inBeacon.putProperties
-
 
 ```javascript
 cordova.plugins.inBeacon.putProperties(userInfo, function cb(){});
@@ -94,7 +90,7 @@ cordova.plugins.inBeacon.getProperty(<key>, function cb(){} );
 ```
 Get a user property. see putProperties.
 
-```
+```javascript
 cordova.plugins.inBeacon.getProperty('name', function (value) {
     app.log('Succesfully got property name:'+value);
 }, function () {
@@ -102,29 +98,28 @@ cordova.plugins.inBeacon.getProperty('name', function (value) {
 });
 ```
 
-### cordova.plugins.inBeacon.hasTag
-### cordova.plugins.inBeacon.setTag
-### cordova.plugins.inBeacon.resetTag
+### cordova.plugins.inBeacon.hasTag / setTag / resetTag
+
 
 Tags are a special type of userproperty that have a name and can be set or reset. Tags are reset by default.
 
 ```javascript
-        cordova.plugins.inBeacon.hasTag('myTag',function(has) {
-			if (has) ...
-        },function(error){});
-		
-		cordova.plugins.inBeacon.setTag('myTag',function() {
-			// tag is now set
-	    },function(error){});	
-		
-		cordova.plugins.inBeacon.resetTag('myTag',function() {
-			// tag is now reset
-	    },function(error){});
-````
+cordova.plugins.inBeacon.hasTag('myTag',function(has) {
+	if (has) ...
+},function(error){});
+	
+cordova.plugins.inBeacon.setTag('myTag',function() {
+	// tag is now set
+},function(error){});	
+	
+cordova.plugins.inBeacon.resetTag('myTag',function() {
+	// tag is now reset
+},function(error){});
+```
 
 
-### cordova.plugins.inBeacon.getPPID
-### cordova.plugins.inBeacon.setPPID
+### cordova.plugins.inBeacon.getPPID / setPPID
+
 
 An alternative for the IDFA is to roll your own Publisher Provided ID. If you use Doubleclick For Publishers (DFP), a PPID might be a better option than using an IDFA. 
 A PPID is a ID that is attached to the App on a Device that can be used for retargeting or identifing the app install on the device. (each app has a different PPID if installed on the same device)
@@ -137,13 +132,13 @@ See [Google DFP documentation on PPID's](https://support.google.com/dfp_premium/
 The PPID is available as a read/write property of the SDK instance:
 
 ```javascript
-        cordova.plugins.inBeacon.getPPID(function(ppid) {
-                console.log('PPID = '+ppid);
-        },function (error) {});
-		
-        cordova.plugins.inBeacon.setPPID('your ppid', function() {
-               // PPID is now set to the specified value
-        },function (error) {});
+cordova.plugins.inBeacon.getPPID(function(ppid) {
+        console.log('PPID = '+ppid);
+},function (error) {});
+	
+cordova.plugins.inBeacon.setPPID('your ppid', function() {
+       // PPID is now set to the specified value
+},function (error) {});
 ```		
 
 ### cordova.plugins.inBeacon.triggerCustomEvent
@@ -192,6 +187,7 @@ cordova.plugins.inBeacon.checkCapabilitiesAndRights()
 
 In order to get more logging, the loglevel might be increased. 
 Possible values:
+
 * cordova.plugins.inBeacon.LOG_NONE 
 * cordova.plugins.inBeacon.LOG_ERROR 
 * cordova.plugins.inBeacon.LOG_LOG 
@@ -202,7 +198,7 @@ Possible values:
 cordova.plugins.inBeacon.setLogLevel(cordova.plugins.inBeacon.LOG_DEBUG);
 ```
 
-### cordova.plugins.inBeacon.refresh
+### cordova.plugins.inBeacon.refresh (legacy)
 
 ```javascript
 cordova.plugins.inBeacon.refresh();

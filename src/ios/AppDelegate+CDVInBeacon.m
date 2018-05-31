@@ -94,18 +94,20 @@
 }
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    InbeaconSdk *inbeacon=nil;
 
-	InbeaconSdk.sharedInstance.logLevel =InbLogLevelError;  // 
     
     NSString *clientId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API clientId"];
     NSString *secret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API secret"];
     
     if (clientId != nil && secret != nil) {
-		[InbeaconSdk createWithClientID: clientId andClientSecret: secret]; 
+		inbeacon=[InbeaconSdk createWithClientID: clientId andClientSecret: secret];
     }
 	else {
 		NSLog(@"INBEACON SDK NOT INITIALIZED: CLIENTID AND/OR CLIENTSECRET NOT DEFINED");
 	}
+    [inbeacon refreshWithForce: YES];
+    
 	// this is NOT an infinite loop! (see swizzle logic)
     return [self xxx_application:application didFinishLaunchingWithOptions:launchOptions];
 }
