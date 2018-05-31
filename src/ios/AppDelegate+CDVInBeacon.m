@@ -94,6 +94,7 @@
 }
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    InbeaconSdk *inbeacon=nil;
 
     InbeaconSdk.sharedInstance.askPermissions = YES;
     InbeaconSdk.sharedInstance.logLevel = InbLogLevelInfo;

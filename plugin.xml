@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- note: keep version on the same line for makesdk -->
-<plugin id="cordova-plugin-inbeacon" version="2.1.16"
+<plugin id="cordova-plugin-inbeacon" version="2.1.18"
         xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -57,6 +57,9 @@
 		<config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
 			<string>This app would like to get your location in the background. Please select background in the list</string>
 		</config-file>
+        <config-file target="*-Info.plist"  parent="NSBluetoothPeripheralUsageDescription">
+            <string>This app would like to use your bluetooth device</string>
+        </config-file>
 
         <header-file src="src/ios/CDVInBeacon.h"/>
         <source-file src="src/ios/CDVInBeacon.m"/>
