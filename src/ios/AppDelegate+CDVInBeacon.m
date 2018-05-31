@@ -17,7 +17,7 @@
  under the License.
  */
 
-#import <InbeaconSdk/InbeaconSdk.h>
+
 #import "AppDelegate+CDVInBeacon.h"
 #import <objc/runtime.h>
 
@@ -94,14 +94,15 @@
 }
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    InbeaconSdk *inbeacon=nil;
 
-    
+    InbeaconSdk.sharedInstance.askPermissions = YES;
+    InbeaconSdk.sharedInstance.logLevel = InbLogLevelInfo;
+
     NSString *clientId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API clientId"];
     NSString *secret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"inBeacon API secret"];
     
     if (clientId != nil && secret != nil) {
-		inbeacon=[InbeaconSdk createWithClientID: clientId andClientSecret: secret];
+		inbeacon = [InbeaconSdk createWithClientID: clientId andClientSecret: secret];
     }
 	else {
 		NSLog(@"INBEACON SDK NOT INITIALIZED: CLIENTID AND/OR CLIENTSECRET NOT DEFINED");

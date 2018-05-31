@@ -18,9 +18,12 @@
  */
 
 #import "AppDelegate.h"
+#import <InbeaconSdk/InbeaconSdk.h>
 #import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate (CDVInBeacon) <UNUserNotificationCenterDelegate>
+
+@property (strong, nonatomic) InbeaconSdk *inbeacon;
 
 - (BOOL) xxx_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void) xxx_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification; 
